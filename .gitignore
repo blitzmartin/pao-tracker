@@ -139,6 +139,6 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Claude Code
-.claude/
-CLAUDE.md
+# Generated native folders (do NOT commit these)
+/android
+/ios
