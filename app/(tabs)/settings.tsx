@@ -6,7 +6,6 @@ import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import {
   Button,
   Card,
-  Checkbox,
   Dialog,
   List,
   Portal,
@@ -16,9 +15,11 @@ import {
 
 export default function SettingsScreen() {
   const [clearDataDialogVisible, setClearDataDialogVisible] = useState(false);
+  const [showNotificationsDialogVisible, setShowNotificationsDialogVisible] =
+    useState(false);
   const [deleteBeautyItems, setDeleteBeautyItems] = useState(true);
   const [dateFormat, setDateFormat] = useState<"DD-MM-YYYY" | "MM-DD-YYYY">(
-    "DD-MM-YYYY"
+    "DD-MM-YYYY",
   );
   const [dateFormatDialogVisible, setDateFormatDialogVisible] = useState(false);
 
@@ -39,7 +40,6 @@ export default function SettingsScreen() {
       console.error("Error loading date format:", error);
     }
   };
-
 
   const saveDateFormat = async (format: "DD-MM-YYYY" | "MM-DD-YYYY") => {
     try {
@@ -65,8 +65,8 @@ export default function SettingsScreen() {
     setClearDataDialogVisible(true);
   };
 
-  const hideClearDataDialog = () => {
-    setClearDataDialogVisible(false);
+  const hideNotificationsDialog = () => {
+    setShowNotificationsDialogVisible(false);
   };
 
   const confirmClearAllData = async () => {
@@ -78,6 +78,26 @@ export default function SettingsScreen() {
       Alert.alert("Error", "Failed to clear data.");
     }
   };
+
+  /***** Notification Dialog Functions START *****/
+  const showNotificationsDialog = () => {
+    setShowNotificationsDialogVisible(true);
+  };
+
+  const hideClearDataDialog = () => {
+    setClearDataDialogVisible(false);
+  };
+
+  const confirmNotificationsSettings = async () => {
+    try {
+      // Here you would typically save the notification settings to AsyncStorage or a backend
+      setShowNotificationsDialogVisible(false);
+      Alert.alert("Success", "Notifications have been set.");
+    } catch (error) {
+      Alert.alert("Error", "Failed to set notifications.");
+    }
+  };
+  /***** Notification Dialog Functions END *****/
 
   return (
     <View style={styles.container}>
@@ -124,6 +144,24 @@ export default function SettingsScreen() {
           </Card.Content>
         </Card>
 
+        <Card style={styles.card}>
+          <Card.Content>
+            <Text variant="titleLarge">Notifications</Text>
+            <Text variant="bodyMedium" style={styles.description}>
+              Set notifications to remind you about product expirations.
+            </Text>
+            <Button
+              mode="outlined"
+              onPress={showNotificationsDialog}
+              style={styles.button}
+              buttonColor="transparent"
+              textColor="#4B5563"
+            >
+              Set Notifications
+            </Button>
+          </Card.Content>
+        </Card>
+
         <Card style={styles.card} onPress={() => router.push("/about")}>
           <Card.Content>
             <View style={styles.aboutHeader}>
@@ -149,8 +187,8 @@ export default function SettingsScreen() {
             <Dialog.Title style={styles.dialogTitle}>Clear Data</Dialog.Title>
             <Dialog.Content>
               <Text variant="bodyMedium" style={styles.dialogContent}>
-                This will delete all your beauty products data. This action cannot be
-                undone.
+                This will delete all your beauty products data. This action
+                cannot be undone.
               </Text>
             </Dialog.Content>
             <Dialog.Actions style={styles.dialogActions}>
@@ -169,6 +207,40 @@ export default function SettingsScreen() {
                 style={styles.deleteButton}
               >
                 Delete Data
+              </Button>
+            </Dialog.Actions>
+          </Dialog>
+
+          <Dialog
+            visible={showNotificationsDialogVisible}
+            // c'è bisogno di una action o basta eseguire showNotificationsDialog settandolo su false?
+            onDismiss={hideNotificationsDialog}
+            style={styles.dialog}
+          >
+            <Dialog.Title style={styles.dialogTitle}>
+              Notifications Settings
+            </Dialog.Title>
+            <Dialog.Content>
+              <Text variant="bodyMedium" style={styles.dialogContent}>
+                Configure your notification preferences.
+              </Text>
+            </Dialog.Content>
+            <Dialog.Actions style={styles.dialogActions}>
+              <Button
+                onPress={hideNotificationsDialog}
+                textColor="#6B7280"
+                style={styles.cancelButton}
+              >
+                Cancel
+              </Button>
+              <Button
+                onPress={confirmNotificationsSettings}
+                mode="contained"
+                buttonColor="#8B5CF6"
+                textColor="#cdd2db"
+                style={styles.deleteButton}
+              >
+                Confirm
               </Button>
             </Dialog.Actions>
           </Dialog>
@@ -198,7 +270,7 @@ export default function SettingsScreen() {
                     color="#4B5563"
                   />
                   <Text variant="bodyMedium" style={styles.radioLabel}>
-                    DD-MM-YYYY (e.g., 25-12-2024)
+                    DD-MM-YYYY (e.g., 25-12-2026)
                   </Text>
                 </View>
 
@@ -212,7 +284,7 @@ export default function SettingsScreen() {
                     color="#4B5563"
                   />
                   <Text variant="bodyMedium" style={styles.radioLabel}>
-                    MM-DD-YYYY (e.g., 12-25-2024)
+                    MM-DD-YYYY (e.g., 12-25-2026)
                   </Text>
                 </View>
               </View>
