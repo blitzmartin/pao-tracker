@@ -1,4 +1,5 @@
 import { AppHeader } from "@/components/AppHeader";
+import { useNotificationSettings } from "@/hooks/useNotifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -10,18 +11,19 @@ import {
   List,
   Portal,
   RadioButton,
+  Switch,
   Text,
 } from "react-native-paper";
 
 export default function SettingsScreen() {
   const [clearDataDialogVisible, setClearDataDialogVisible] = useState(false);
-  const [showNotificationsDialogVisible, setShowNotificationsDialogVisible] =
-    useState(false);
   const [deleteBeautyItems, setDeleteBeautyItems] = useState(true);
   const [dateFormat, setDateFormat] = useState<"DD-MM-YYYY" | "MM-DD-YYYY">(
     "DD-MM-YYYY",
   );
   const [dateFormatDialogVisible, setDateFormatDialogVisible] = useState(false);
+
+  const { enabled, toggle, loading } = useNotificationSettings();
 
   useEffect(() => {
     loadDateFormat();
@@ -65,10 +67,6 @@ export default function SettingsScreen() {
     setClearDataDialogVisible(true);
   };
 
-  const hideNotificationsDialog = () => {
-    setShowNotificationsDialogVisible(false);
-  };
-
   const confirmClearAllData = async () => {
     try {
       await AsyncStorage.removeItem("beautyItems");
@@ -79,25 +77,9 @@ export default function SettingsScreen() {
     }
   };
 
-  /***** Notification Dialog Functions START *****/
-  const showNotificationsDialog = () => {
-    setShowNotificationsDialogVisible(true);
-  };
-
   const hideClearDataDialog = () => {
     setClearDataDialogVisible(false);
   };
-
-  const confirmNotificationsSettings = async () => {
-    try {
-      // Here you would typically save the notification settings to AsyncStorage or a backend
-      setShowNotificationsDialogVisible(false);
-      Alert.alert("Success", "Notifications have been set.");
-    } catch (error) {
-      Alert.alert("Error", "Failed to set notifications.");
-    }
-  };
-  /***** Notification Dialog Functions END *****/
 
   return (
     <View style={styles.container}>
@@ -147,18 +129,34 @@ export default function SettingsScreen() {
         <Card style={styles.card}>
           <Card.Content>
             <Text variant="titleLarge">Notifications</Text>
+
             <Text variant="bodyMedium" style={styles.description}>
-              Set notifications to remind you about product expirations.
+              Get reminded at 9:00 AM on the first day of the month when a
+              product is about to expire.
             </Text>
-            <Button
-              mode="outlined"
-              onPress={showNotificationsDialog}
-              style={styles.button}
-              buttonColor="transparent"
-              textColor="#4B5563"
-            >
-              Set Notifications
-            </Button>
+
+            <List.Item
+              title="Enable notifications"
+              description={
+                enabled ? "Notifications are ON" : "Notifications are OFF"
+              }
+              right={() => (
+                <Switch
+                  value={enabled}
+                  onValueChange={async () => {
+                    const result = await toggle();
+
+                    if (result?.success === false) {
+                      Alert.alert(
+                        "Permission required",
+                        "Please enable notifications permissions in your device settings.",
+                      );
+                    }
+                  }}
+                  disabled={loading}
+                />
+              )}
+            />
           </Card.Content>
         </Card>
 
@@ -207,40 +205,6 @@ export default function SettingsScreen() {
                 style={styles.deleteButton}
               >
                 Delete Data
-              </Button>
-            </Dialog.Actions>
-          </Dialog>
-
-          <Dialog
-            visible={showNotificationsDialogVisible}
-            // c'è bisogno di una action o basta eseguire showNotificationsDialog settandolo su false?
-            onDismiss={hideNotificationsDialog}
-            style={styles.dialog}
-          >
-            <Dialog.Title style={styles.dialogTitle}>
-              Notifications Settings
-            </Dialog.Title>
-            <Dialog.Content>
-              <Text variant="bodyMedium" style={styles.dialogContent}>
-                Configure your notification preferences.
-              </Text>
-            </Dialog.Content>
-            <Dialog.Actions style={styles.dialogActions}>
-              <Button
-                onPress={hideNotificationsDialog}
-                textColor="#6B7280"
-                style={styles.cancelButton}
-              >
-                Cancel
-              </Button>
-              <Button
-                onPress={confirmNotificationsSettings}
-                mode="contained"
-                buttonColor="#8B5CF6"
-                textColor="#cdd2db"
-                style={styles.deleteButton}
-              >
-                Confirm
               </Button>
             </Dialog.Actions>
           </Dialog>

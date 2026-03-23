@@ -1,11 +1,15 @@
+import { TextInputThemes } from "@/constants/Theme";
+import { scheduleNotificationForItem } from "@/utils/notificationsUtils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Card, Chip, Text, TextInput } from "react-native-paper";
-import { calculateDaysUntilExpiry, getMonthYearExpiryDate } from "../utils/dateUtils";
-import { TextInputThemes } from "@/constants/Theme";
+import {
+  calculateDaysUntilExpiry,
+  getMonthYearExpiryDate,
+} from "../utils/dateUtils";
 
 interface BeautyItem {
   id: string;
@@ -47,7 +51,11 @@ const MONTHS = [
 
 const generateYears = (): number[] => {
   const years = [];
-  for (let i = new Date().getFullYear(); i <= new Date().getFullYear() + 10; i++) {
+  for (
+    let i = new Date().getFullYear();
+    i <= new Date().getFullYear() + 10;
+    i++
+  ) {
     years.push(i);
   }
   return years;
@@ -62,7 +70,6 @@ export default function AddBeautyScreen() {
   const [usePAO, setUsePAO] = useState(true);
   const [selectedPAO, setSelectedPAO] = useState<number | null>(null);
 
-
   const calculatePAOExpiry = (openingDate: Date, paoMonths: number): Date => {
     const expiry = new Date(openingDate);
     expiry.setMonth(expiry.getMonth() + paoMonths);
@@ -76,7 +83,7 @@ export default function AddBeautyScreen() {
   const formatExpiryDate = (month: number, year: number): string => {
     const monthNames = [
       "January",
-      "February", 
+      "February",
       "March",
       "April",
       "May",
@@ -136,7 +143,7 @@ export default function AddBeautyScreen() {
       items.push(newItem);
 
       await AsyncStorage.setItem("beautyItems", JSON.stringify(items));
-
+      await scheduleNotificationForItem(newItem);
 
       // Navigate back directly without confirmation
       router.back();
@@ -146,7 +153,6 @@ export default function AddBeautyScreen() {
       setIsLoading(false);
     }
   };
-
 
   return (
     <ScrollView style={styles.container}>
@@ -179,9 +185,9 @@ export default function AddBeautyScreen() {
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: '#E9D5FF',
-                    onSecondaryContainer: '#6B21A8'
-                  }
+                    secondaryContainer: "#E9D5FF",
+                    onSecondaryContainer: "#6B21A8",
+                  },
                 }}
               >
                 {category}
@@ -202,9 +208,9 @@ export default function AddBeautyScreen() {
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: '#E9D5FF',
-                    onSecondaryContainer: '#6B21A8'
-                  }
+                    secondaryContainer: "#E9D5FF",
+                    onSecondaryContainer: "#6B21A8",
+                  },
                 }}
               >
                 PAO (Period After Opening)
@@ -217,9 +223,9 @@ export default function AddBeautyScreen() {
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: '#E9D5FF',
-                    onSecondaryContainer: '#6B21A8'
-                  }
+                    secondaryContainer: "#E9D5FF",
+                    onSecondaryContainer: "#6B21A8",
+                  },
                 }}
               >
                 Custom Date
@@ -247,9 +253,9 @@ export default function AddBeautyScreen() {
                     showSelectedOverlay={true}
                     theme={{
                       colors: {
-                        secondaryContainer: '#E9D5FF',
-                        onSecondaryContainer: '#6B21A8'
-                      }
+                        secondaryContainer: "#E9D5FF",
+                        onSecondaryContainer: "#6B21A8",
+                      },
                     }}
                   >
                     {months}M
@@ -328,7 +334,7 @@ export default function AddBeautyScreen() {
               style={styles.cancelButton}
               buttonColor="transparent"
               textColor="#8B5CF6"
-              theme={{ colors: { outline: '#8B5CF6' } }}
+              theme={{ colors: { outline: "#8B5CF6" } }}
             >
               Cancel
             </Button>
