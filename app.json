@@ -38,7 +38,15 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "ndkVersion": "26.1.10909125"
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
