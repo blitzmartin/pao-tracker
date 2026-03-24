@@ -1,4 +1,4 @@
-import { TextInputThemes } from "@/constants/Theme";
+import { SectionColors, TextInputThemes } from "@/constants/Theme";
 import { scheduleNotificationForItem } from "@/utils/notificationsUtils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
@@ -181,7 +181,7 @@ export default function AddBeautyScreen() {
                 selected={selectedCategory === category}
                 onPress={() => setSelectedCategory(category)}
                 style={styles.categoryChip}
-                selectedColor="#8B5CF6"
+                selectedColor={SectionColors.beauty}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -204,7 +204,7 @@ export default function AddBeautyScreen() {
                 selected={usePAO}
                 onPress={() => setUsePAO(true)}
                 style={styles.typeChip}
-                selectedColor="#8B5CF6"
+                selectedColor={SectionColors.beauty}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -219,7 +219,7 @@ export default function AddBeautyScreen() {
                 selected={!usePAO}
                 onPress={() => setUsePAO(false)}
                 style={styles.typeChip}
-                selectedColor="#8B5CF6"
+                selectedColor={SectionColors.beauty}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -249,7 +249,7 @@ export default function AddBeautyScreen() {
                     selected={selectedPAO === months}
                     onPress={() => setSelectedPAO(months)}
                     style={styles.paoChip}
-                    selectedColor="#8B5CF6"
+                    selectedColor={SectionColors.beauty}
                     showSelectedOverlay={true}
                     theme={{
                       colors: {
@@ -322,7 +322,7 @@ export default function AddBeautyScreen() {
               loading={isLoading}
               disabled={isLoading}
               style={styles.saveButton}
-              buttonColor="#8B5CF6"
+              buttonColor={SectionColors.beauty}
               textColor="white"
             >
               Save Beauty Product
@@ -333,8 +333,12 @@ export default function AddBeautyScreen() {
               onPress={() => router.back()}
               style={styles.cancelButton}
               buttonColor="transparent"
-              textColor="#8B5CF6"
-              theme={{ colors: { outline: "#8B5CF6" } }}
+              textColor={SectionColors.beauty}
+              theme={{
+                colors: {
+                  outline: SectionColors.beauty
+                }
+              }}
             >
               Cancel
             </Button>
@@ -415,24 +419,24 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 8,
-    color: "#666",
+    color: "#8b8b8b",
   },
   pickerContainer: {
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 4,
+    borderRadius: 10,
     backgroundColor: "white",
   },
   picker: {
-    height: 50,
+    height: 60,
   },
   datePreview: {
     textAlign: "center",
     marginBottom: 16,
-    padding: 12,
+    padding: 8,
     backgroundColor: "#f3e8ff",
     borderRadius: 8,
-    color: "#7c3aed",
+    color: SectionColors.switchOn,
     fontWeight: "600",
   },
 });

@@ -1,4 +1,5 @@
 import { AppHeader } from "@/components/AppHeader";
+import { SectionColors } from '@/constants/Theme';
 import { useNotificationSettings } from "@/hooks/useNotifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
@@ -91,19 +92,16 @@ export default function SettingsScreen() {
             <List.Item
               title="Date Format"
               description={`Currently using: ${dateFormat}`}
-              right={() => (
-                <Button
+            />
+             <Button
                   mode="outlined"
                   onPress={showDateFormatDialog}
-                  compact
                   buttonColor="transparent"
                   textColor="#4B5563"
                   theme={{ colors: { outline: "#4B5563" } }}
                 >
                   Change
                 </Button>
-              )}
-            />
           </Card.Content>
         </Card>
 
@@ -137,13 +135,11 @@ export default function SettingsScreen() {
 
             <List.Item
               title="Enable notifications"
-    
               right={() => (
                 <Switch
                   value={enabled}
                   onValueChange={async () => {
                     const result = await toggle();
-
                     if (result?.success === false) {
                       Alert.alert(
                         "Permission required",
@@ -152,6 +148,8 @@ export default function SettingsScreen() {
                     }
                   }}
                   disabled={loading}
+                  trackColor={{false: '#B2B2B2', true: SectionColors.beauty}}
+                  color={SectionColors.switchOn}
                 />
               )}
             />
@@ -190,7 +188,7 @@ export default function SettingsScreen() {
             <Dialog.Actions style={styles.dialogActions}>
               <Button
                 onPress={hideClearDataDialog}
-                textColor="#6B7280"
+                textColor={SectionColors.settings}
                 style={styles.cancelButton}
               >
                 Cancel
@@ -254,7 +252,7 @@ export default function SettingsScreen() {
             <Dialog.Actions style={styles.dialogActions}>
               <Button
                 onPress={hideDateFormatDialog}
-                textColor="#6B7280"
+                textColor={SectionColors.settings}
                 style={styles.cancelButton}
               >
                 Cancel

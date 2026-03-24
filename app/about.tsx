@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   version: {
     textAlign: "center",
-    color: "#6B7280",
+    color: "{SectionColors.settings}",
   },
   sectionTitle: {
     color: "#1F2937",
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   featureItem: {
-    color: "#6B7280",
+    color: "{SectionColors.settings}",
     marginBottom: 4,
     lineHeight: 18,
   },
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   techLabel: {
-    color: "#6B7280",
+    color: "{SectionColors.settings}",
     fontWeight: "500",
   },
   techValue: {
