@@ -5,6 +5,17 @@ import * as Notifications from "expo-notifications";
 export const getNotificationDateFromExpiry = (expiryISO: string): Date => {
   const expiry = new Date(expiryISO);
 
+  /******** TO REMOVE ********/
+  // In debug mode, trigger notification after 10 seconds instead of calculating the date from expiry
+  const DEBUG_MODE = false;
+  if (DEBUG_MODE) {
+    // 👉 trigger tra 10 secondi
+    const now = new Date();
+    now.setSeconds(now.getSeconds() + 10);
+    return now;
+  }
+  /********    END   ********/
+
   return new Date(
     expiry.getFullYear(),
     expiry.getMonth(),

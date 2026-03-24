@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "Beauty Tracker",
-    "slug": "beauty-tracker",
+    "name": "PAO Tracker",
+    "slug": "pao-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "beautytracker",
+    "scheme": "paotracker",
     "userInterfaceStyle": "automatic",
     "description": "Track your beauty product expiry dates and PAO (Period After Opening) with smart reminders.",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.beautytracker.app",
+      "bundleIdentifier": "com.paotracker.app",
       "infoPlist": {}
     },
     "android": {
@@ -19,7 +19,7 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.beautytracker.app",
+      "package": "com.paotracker.app",
       "edgeToEdgeEnabled": true
     },
     "web": {

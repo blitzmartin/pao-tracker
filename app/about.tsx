@@ -8,7 +8,7 @@ export default function AboutScreen() {
 
   const handleContactSupport = () => {
     const email = "paperboardlabs@gmail.com"; // Replace with your actual email
-    const subject = "Beauty Tracker Support Request";
+    const subject = "PAO Tracker Support Request";
     const body = `App Version: ${appVersion} (${buildNumber})\nDevice: Mobile\n\nDescribe your issue or feedback:\n`;
 
     const mailto = `mailto:${email}?subject=${encodeURIComponent(
@@ -25,7 +25,7 @@ export default function AboutScreen() {
 
   const handleReportBug = () => {
     const email = "paperboardlabs@gmail.com"; // Replace with support@paperboardlabs.com when ready
-    const subject = "Beauty Tracker Bug Report";
+    const subject = "PAO Tracker Bug Report";
     const body = `App Version: ${appVersion} (${buildNumber})\nDevice: Mobile\n\nSteps to reproduce:\n1. \n2. \n3. \n\nExpected behavior:\n\nActual behavior:\n\nAdditional notes:\n`;
 
     const mailto = `mailto:${email}?subject=${encodeURIComponent(
@@ -43,7 +43,7 @@ export default function AboutScreen() {
   const handlePrivacyPolicy = () => {
     Alert.alert(
       "Privacy Policy",
-      "Beauty Tracker stores all data locally on your device. No personal information is collected or transmitted to external servers."
+      "PAO Tracker stores all data locally on your device. No personal information is collected or transmitted to external servers."
     );
   };
 
@@ -56,7 +56,7 @@ export default function AboutScreen() {
               Our Mission
             </Text>
             <Text variant="bodyMedium" style={styles.missionText}>
-              Beauty Tracker helps you reduce waste and save money by tracking
+              PAO Tracker helps you reduce waste and save money by tracking
               expiry dates and PAO (Period After Opening) for your beauty products. Our goal
               is to make it easy for everyone to manage their cosmetics and skincare
               efficiently and sustainably.
@@ -93,7 +93,7 @@ export default function AboutScreen() {
 
             <List.Item
               title="Contact Support"
-              description="Get help with using Beauty Tracker"
+              description="Get help with using PAO Tracker"
               left={(props) => <List.Icon {...props} icon="help-circle" />}
               onPress={handleContactSupport}
               style={styles.listItem}

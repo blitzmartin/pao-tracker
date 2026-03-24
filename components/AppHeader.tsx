@@ -4,8 +4,8 @@ import { StyleSheet, View } from "react-native";
 import { Avatar, Text } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-// Simple icon-based logo for Beauty Tracker
-const BeautyTrackerLogo = () => (
+// Simple icon-based logo for PAO Tracker
+const PAOTrackerLogo = () => (
   <Avatar.Icon
     size={40}
     icon="face-woman-shimmer-outline"
@@ -29,7 +29,7 @@ export function AppHeader() {
       ]}
     >
       <View style={styles.headerContent}>
-        <BeautyTrackerLogo />
+        <PAOTrackerLogo />
         <Text
           variant="headlineMedium"
           style={[styles.title, { color: Colors.light.brand }]}
