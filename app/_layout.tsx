@@ -1,3 +1,4 @@
+import { useColorScheme } from "@/hooks/useColorScheme";
 import {
   DarkTheme,
   DefaultTheme,
@@ -7,11 +8,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { PaperProvider } from "react-native-paper";
 import "react-native-reanimated";
-
-import { yellowDarkTheme, yellowLightTheme } from "@/constants/Theme";
-import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -26,9 +23,6 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider
-      theme={colorScheme === "dark" ? yellowDarkTheme : yellowLightTheme}
-    >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -41,6 +35,5 @@ export default function RootLayout() {
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
-    </PaperProvider>
   );
 }

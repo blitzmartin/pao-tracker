@@ -1,19 +1,19 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { SectionColors } from '@/constants/Theme';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Tabs } from 'expo-router';
+import React from 'react';
+import { Platform } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   const tabColors = {
-    beauty: SectionColors.beauty,       // Purple  
-    settings: SectionColors.settings    // Grey
+    beauty: SectionColors.beauty,
+    settings: SectionColors.settings
   };
 
   return (
@@ -39,10 +39,10 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol 
-              size={28} 
-              name="pump.soap" 
-              color={focused ? tabColors.beauty : color} 
+            <IconSymbol
+              size={28}
+              name="pump.soap"
+              color={focused ? tabColors.beauty : color}
             />
           ),
         }}
@@ -52,10 +52,10 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol 
-              size={28} 
-              name="gearshape.fill" 
-              color={focused ? tabColors.settings : color} 
+            <IconSymbol
+              size={28}
+              name="gearshape.fill"
+              color={focused ? tabColors.settings : color}
             />
           ),
         }}

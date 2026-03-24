@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from 'react';
-import { View, StyleSheet, FlatList, RefreshControl, Alert } from 'react-native';
-import { Card, Text, FAB, Chip, IconButton } from 'react-native-paper';
-import { useFocusEffect } from '@react-navigation/native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { router } from 'expo-router';
-import { formatDateWithStoredPreference, calculateDaysUntilExpiry } from '@/utils/dateUtils';
 import { AppHeader } from '@/components/AppHeader';
+import { calculateDaysUntilExpiry, formatDateWithStoredPreference } from '@/utils/dateUtils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+import { router } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import { Alert, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { Card, Chip, FAB, IconButton, Text } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface BeautyItem {
   id: string;
@@ -29,18 +29,18 @@ export default function BeautyListScreen() {
       const items = await AsyncStorage.getItem('beautyItems');
       if (items) {
         const parsedItems: BeautyItem[] = JSON.parse(items);
-        
+
         // Recalculate days until expiry for each item
         const updatedItems = parsedItems.map(item => ({
           ...item,
           daysUntilExpiry: calculateDaysUntilExpiry(new Date(item.expiryDate))
         }));
-        
+
         // Sort by days until expiry (most urgent first)
         updatedItems.sort((a, b) => a.daysUntilExpiry - b.daysUntilExpiry);
-        
+
         setBeautyItems(updatedItems);
-        
+
         // Format dates for display
         const dateFormatPromises = updatedItems.map(async (item) => {
           const expiryFormatted = await formatDateWithStoredPreference(new Date(item.expiryDate));
@@ -50,7 +50,7 @@ export default function BeautyListScreen() {
           }
           return { id: item.id, expiry: expiryFormatted, opening: openingFormatted };
         });
-        
+
         const formattedDateResults = await Promise.all(dateFormatPromises);
         const dateMap: {[key: string]: {expiry: string, opening?: string}} = {};
         formattedDateResults.forEach(({ id, expiry, opening }) => {
@@ -92,7 +92,7 @@ export default function BeautyListScreen() {
             try {
               const updatedItems = beautyItems.filter(item => item.id !== id);
               await AsyncStorage.setItem('beautyItems', JSON.stringify(updatedItems));
-              
+
               setBeautyItems(updatedItems);
             } catch (error) {
               Alert.alert('Error', 'Failed to delete beauty product');
@@ -114,19 +114,19 @@ export default function BeautyListScreen() {
   const getExpiryDisplay = (item: BeautyItem): string => {
     if (item.daysUntilExpiry < 0) return 'Expired';
     if (item.daysUntilExpiry === 0) return 'Today';
-    
+
     // For PAO products, show the original PAO duration
     if (item.paoMonths) {
       if (item.daysUntilExpiry < 0) return 'Expired';
       return `${item.paoMonths}M left`;
     }
-    
+
     // For regular expiry dates, show months if > 60 days, otherwise days
     if (item.daysUntilExpiry > 60) {
       const monthsRemaining = Math.ceil(item.daysUntilExpiry / 30);
       return `${monthsRemaining}M left`;
     }
-    
+
     return `${item.daysUntilExpiry}d left`;
   };
 
@@ -142,14 +142,14 @@ export default function BeautyListScreen() {
               {item.paoMonths && ` • PAO: ${item.paoMonths}M`}
             </Text>
             <Text variant="bodySmall" style={styles.expiryDate}>
-              {item.paoMonths && item.openingDate 
+              {item.paoMonths && item.openingDate
                 ? `Opened: ${formattedDates[item.id]?.opening || 'Loading...'}`
                 : `Expires: ${formattedDates[item.id]?.expiry || 'Loading...'}`
               }
             </Text>
           </View>
           <View style={styles.cardActions}>
-            <Chip 
+            <Chip
               textStyle={[styles.chipText, { color: getExpiryColor(item.daysUntilExpiry) }]}
               style={[styles.expiryChip, { borderColor: getExpiryColor(item.daysUntilExpiry) }]}
             >
@@ -169,7 +169,7 @@ export default function BeautyListScreen() {
   return (
     <View style={styles.container}>
       <AppHeader />
-      
+
       {beautyItems.length === 0 && !refreshing ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyText}>No beauty products found.</Text>
