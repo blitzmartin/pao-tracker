@@ -137,9 +137,7 @@ export default function SettingsScreen() {
 
             <List.Item
               title="Enable notifications"
-              description={
-                enabled ? "Notifications are ON" : "Notifications are OFF"
-              }
+    
               right={() => (
                 <Switch
                   value={enabled}
