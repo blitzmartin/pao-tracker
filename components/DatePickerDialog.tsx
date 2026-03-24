@@ -1,18 +1,9 @@
+import { DatePickerDialogProps } from '@/utils/types';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import { Button, Dialog, Portal, Text } from 'react-native-paper';
 import { formatDateWithStoredPreference } from '../utils/dateUtils';
-
-interface DatePickerDialogProps {
-  visible: boolean;
-  date: Date;
-  onConfirm: (date: Date) => void;
-  onDismiss: () => void;
-  title: string;
-  minimumDate?: Date;
-  maximumDate?: Date;
-}
 
 export function DatePickerDialog({
   visible,

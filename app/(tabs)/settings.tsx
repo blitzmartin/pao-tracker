@@ -1,5 +1,5 @@
 import { AppHeader } from "@/components/AppHeader";
-import { SectionColors } from '@/constants/Theme';
+import { AppColors } from '@/constants/Theme';
 import { useNotificationSettings } from "@/hooks/useNotifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
@@ -148,8 +148,8 @@ export default function SettingsScreen() {
                     }
                   }}
                   disabled={loading}
-                  trackColor={{false: '#B2B2B2', true: SectionColors.beauty}}
-                  color={SectionColors.switchOn}
+                  trackColor={{false: '#B2B2B2', true: AppColors.beauty}}
+                  color={AppColors.switchOn}
                 />
               )}
             />
@@ -188,7 +188,7 @@ export default function SettingsScreen() {
             <Dialog.Actions style={styles.dialogActions}>
               <Button
                 onPress={hideClearDataDialog}
-                textColor={SectionColors.settings}
+                textColor={AppColors.settings}
                 style={styles.cancelButton}
               >
                 Cancel
@@ -252,7 +252,7 @@ export default function SettingsScreen() {
             <Dialog.Actions style={styles.dialogActions}>
               <Button
                 onPress={hideDateFormatDialog}
-                textColor={SectionColors.settings}
+                textColor={AppColors.settings}
                 style={styles.cancelButton}
               >
                 Cancel

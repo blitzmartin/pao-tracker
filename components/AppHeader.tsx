@@ -1,6 +1,4 @@
-import { Colors } from "@/constants/Colors";
-import { AppColors } from "@/constants/Theme";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { Colors } from '@/constants/Theme';
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Text } from "react-native-paper";
@@ -18,7 +16,6 @@ const BeautyTrackerLogo = ({ size = 40 }: { size?: number }) => (
 );
 
 export function AppHeader() {
-  const colorScheme = useColorScheme() ?? "light";
   const insets = useSafeAreaInsets();
 
   return (
@@ -26,7 +23,7 @@ export function AppHeader() {
       style={[
         styles.header,
         {
-          backgroundColor: AppColors[colorScheme].background,
+          backgroundColor: '#fff',
           paddingTop: insets.top + 16,
         },
       ]}

@@ -1,5 +1,6 @@
 import { AppHeader } from '@/components/AppHeader';
 import { calculateDaysUntilExpiry, formatDateWithStoredPreference } from '@/utils/dateUtils';
+import { BeautyItem } from '@/utils/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { router } from 'expo-router';
@@ -8,15 +9,6 @@ import { Alert, FlatList, RefreshControl, StyleSheet, View } from 'react-native'
 import { Card, Chip, FAB, IconButton, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-interface BeautyItem {
-  id: string;
-  name: string;
-  expiryDate: string;
-  category?: string;
-  daysUntilExpiry: number;
-  paoMonths?: number;
-  openingDate?: string;
-}
 
 export default function BeautyListScreen() {
   const [beautyItems, setBeautyItems] = useState<BeautyItem[]>([]);

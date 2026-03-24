@@ -1,8 +1,5 @@
-import { Colors } from './Colors';
-
-
 // Section-specific colors
-export const SectionColors = {
+export const AppColors = {
   beauty: '#8B5CF6',
   switchOn: '#5919f1',
   settings: '#6B7280'
@@ -12,26 +9,43 @@ export const SectionColors = {
 export const TextInputThemes = {
   beauty: {
     colors: {
-      primary: SectionColors.beauty,
-      onSurfaceVariant: SectionColors.beauty,
+      primary: AppColors.beauty,
+      onSurfaceVariant: AppColors.beauty,
     },
   },
   settings: {
     colors: {
-      primary: SectionColors.settings,
-      onSurfaceVariant: SectionColors.settings,
+      primary: AppColors.settings,
+      onSurfaceVariant: AppColors.settings,
     },
   },
 };
 
-// Centralized theme colors for consistent usage across components
-export const AppColors = {
+
+/* Theme colors for each section */
+
+const tintColorLight = '#c3aef6ff';
+const tintColorDark = '#fff';
+const brandColor = '#8B5CF6';
+
+
+export const Colors = {
   light: {
-    ...Colors.light,
-    cardBackground: Colors.light.background,
+    text: '#11181C',
+    background: '#fff',
+    tint: tintColorLight,
+    icon: '#686976ff',
+    tabIconDefault: '#687076',
+    tabIconSelected: tintColorLight,
+    brand: brandColor,
   },
   dark: {
-    ...Colors.dark,
-    cardBackground: Colors.dark.background,
+    text: '#ECEDEE',
+    background: '#151718',
+    tint: tintColorDark,
+    icon: '#9BA1A6',
+    tabIconDefault: '#9BA1A6',
+    tabIconSelected: tintColorDark,
+    brand: brandColor,
   },
 };

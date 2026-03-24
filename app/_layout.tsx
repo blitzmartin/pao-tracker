@@ -8,6 +8,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { PaperProvider } from "react-native-paper";
 import "react-native-reanimated";
 
 export default function RootLayout() {
@@ -23,6 +24,8 @@ export default function RootLayout() {
   }
 
   return (
+    <PaperProvider
+    >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -35,5 +38,6 @@ export default function RootLayout() {
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
+    </PaperProvider>
   );
 }

@@ -1,5 +1,7 @@
-import { SectionColors, TextInputThemes } from "@/constants/Theme";
+import { AppColors, TextInputThemes } from "@/constants/Theme";
+import { BEAUTY_CATEGORIES, monthNames, MONTHS, PAO_OPTIONS } from '@/utils/constants';
 import { scheduleNotificationForItem } from "@/utils/notificationsUtils";
+import { BeautyItem } from '@/utils/types';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
 import { router } from "expo-router";
@@ -11,43 +13,7 @@ import {
   getMonthYearExpiryDate,
 } from "../utils/dateUtils";
 
-interface BeautyItem {
-  id: string;
-  name: string;
-  expiryDate: string;
-  category?: string;
-  daysUntilExpiry: number;
-  paoMonths?: number;
-  openingDate?: string;
-}
 
-const BEAUTY_CATEGORIES = [
-  "Skincare",
-  "Makeup",
-  "Hair Care",
-  "Body Care",
-  "Fragrance",
-  "Nail Care",
-  "Sun Care",
-  "Other",
-];
-
-const PAO_OPTIONS = [6, 9, 12, 24, 36];
-
-const MONTHS = [
-  { label: "January", value: 1 },
-  { label: "February", value: 2 },
-  { label: "March", value: 3 },
-  { label: "April", value: 4 },
-  { label: "May", value: 5 },
-  { label: "June", value: 6 },
-  { label: "July", value: 7 },
-  { label: "August", value: 8 },
-  { label: "September", value: 9 },
-  { label: "October", value: 10 },
-  { label: "November", value: 11 },
-  { label: "December", value: 12 },
-];
 
 const generateYears = (): number[] => {
   const years = [];
@@ -81,20 +47,6 @@ export default function AddBeautyScreen() {
   };
 
   const formatExpiryDate = (month: number, year: number): string => {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
     return `${monthNames[month - 1]} ${year}`;
   };
 
@@ -166,7 +118,6 @@ export default function AddBeautyScreen() {
             mode="outlined"
             theme={TextInputThemes.beauty}
           />
-
           <Text variant="bodyMedium" style={styles.label}>
             Category
           </Text>
@@ -181,7 +132,7 @@ export default function AddBeautyScreen() {
                 selected={selectedCategory === category}
                 onPress={() => setSelectedCategory(category)}
                 style={styles.categoryChip}
-                selectedColor={SectionColors.beauty}
+                selectedColor={AppColors.beauty}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -204,7 +155,7 @@ export default function AddBeautyScreen() {
                 selected={usePAO}
                 onPress={() => setUsePAO(true)}
                 style={styles.typeChip}
-                selectedColor={SectionColors.beauty}
+                selectedColor={AppColors.beauty}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -219,7 +170,7 @@ export default function AddBeautyScreen() {
                 selected={!usePAO}
                 onPress={() => setUsePAO(false)}
                 style={styles.typeChip}
-                selectedColor={SectionColors.beauty}
+                selectedColor={AppColors.beauty}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -249,7 +200,7 @@ export default function AddBeautyScreen() {
                     selected={selectedPAO === months}
                     onPress={() => setSelectedPAO(months)}
                     style={styles.paoChip}
-                    selectedColor={SectionColors.beauty}
+                    selectedColor={AppColors.beauty}
                     showSelectedOverlay={true}
                     theme={{
                       colors: {
@@ -322,7 +273,7 @@ export default function AddBeautyScreen() {
               loading={isLoading}
               disabled={isLoading}
               style={styles.saveButton}
-              buttonColor={SectionColors.beauty}
+              buttonColor={AppColors.beauty}
               textColor="white"
             >
               Save Beauty Product
@@ -333,10 +284,10 @@ export default function AddBeautyScreen() {
               onPress={() => router.back()}
               style={styles.cancelButton}
               buttonColor="transparent"
-              textColor={SectionColors.beauty}
+              textColor={AppColors.beauty}
               theme={{
                 colors: {
-                  outline: SectionColors.beauty
+                  outline: AppColors.beauty
                 }
               }}
             >
@@ -436,7 +387,7 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "#f3e8ff",
     borderRadius: 8,
-    color: SectionColors.switchOn,
+    color: AppColors.switchOn,
     fontWeight: "600",
   },
 });
