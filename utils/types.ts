@@ -1,3 +1,5 @@
+import { TextProps, ViewProps } from 'react-native';
+
 export type BeautyItem = {
   id: string;
   name: string;
@@ -17,3 +19,13 @@ export type DatePickerDialogProps = {
   minimumDate?: Date;
   maximumDate?: Date;
 }
+
+export type ThemedTextProps = TextProps & {
+  lightColor?: string;
+  darkColor?: string;
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+};
+
+export type ThemedViewProps = ViewProps & {
+  backgroundColor?: string;
+};
