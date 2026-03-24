@@ -1,4 +1,4 @@
-import { AppColors, Colors } from '@/constants/Theme';
+import { AppColors, Colors } from '@/utils/Theme';
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Text } from "react-native-paper";
@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const PAOTrackerLogo = () => (
   <Avatar.Icon
     size={40}
-    icon="face-woman-shimmer-outline"
+    icon="lotion-outline"
     style={{
       backgroundColor: AppColors.beauty,
     }}

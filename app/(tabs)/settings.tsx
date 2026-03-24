@@ -1,6 +1,6 @@
 import { AppHeader } from "@/components/AppHeader";
-import { AppColors } from '@/constants/Theme';
 import { useNotificationSettings } from "@/hooks/useNotifications";
+import { AppColors } from '@/utils/Theme';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";

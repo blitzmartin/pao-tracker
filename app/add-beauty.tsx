@@ -1,4 +1,4 @@
-import { AppColors, TextInputThemes } from "@/constants/Theme";
+import { AppColors, TextInputThemes } from "@/utils/Theme";
 import { BEAUTY_CATEGORIES, monthNames, MONTHS, PAO_OPTIONS } from '@/utils/constants';
 import { scheduleNotificationForItem } from "@/utils/notificationsUtils";
 import { BeautyItem } from '@/utils/types';

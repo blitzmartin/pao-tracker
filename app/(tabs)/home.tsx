@@ -58,7 +58,6 @@ export default function BeautyListScreen() {
     }
   };
 
-
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await loadBeautyItems();
