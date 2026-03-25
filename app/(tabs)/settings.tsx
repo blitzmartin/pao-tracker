@@ -6,14 +6,14 @@ import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import {
-    Button,
-    Card,
-    Dialog,
-    List,
-    Portal,
-    RadioButton,
-    Switch,
-    Text,
+  Button,
+  Card,
+  Dialog,
+  List,
+  Portal,
+  RadioButton,
+  Switch,
+  Text,
 } from "react-native-paper";
 
 export default function SettingsScreen() {
@@ -129,7 +129,7 @@ export default function SettingsScreen() {
             <Text variant="titleLarge">Notifications</Text>
 
             <Text variant="bodyMedium" style={styles.description}>
-              Get reminded at 9:00 AM on the first day of the month when a
+              Get reminded on the first day of the month when a
               product is about to expire.
             </Text>
 
