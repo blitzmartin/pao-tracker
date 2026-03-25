@@ -1,4 +1,4 @@
-import { AppColors, Colors } from '@/utils/Theme';
+import { AppColors } from '@/utils/Theme';
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Text } from "react-native-paper";
@@ -10,7 +10,7 @@ const PAOTrackerLogo = () => (
     size={40}
     icon="lotion-outline"
     style={{
-      backgroundColor: AppColors.beauty,
+      backgroundColor: AppColors.brandColor,
     }}
   />
 );
@@ -32,7 +32,7 @@ export function AppHeader() {
         <PAOTrackerLogo />
         <Text
           variant="headlineMedium"
-          style={[styles.title, { color: Colors.light.brand }]}
+          style={[styles.title, { color: AppColors.brandColor }]}
         >
           PAO Tracker
         </Text>

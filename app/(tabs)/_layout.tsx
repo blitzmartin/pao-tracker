@@ -34,7 +34,7 @@ export default function TabLayout() {
             <IconSymbol
               size={28}
               name="pump.soap"
-              color={focused ? AppColors.beauty : color}
+              color={focused ? AppColors.brandColor : color}
             />
           ),
         }}
@@ -47,7 +47,7 @@ export default function TabLayout() {
             <IconSymbol
               size={28}
               name="gearshape.fill"
-              color={focused ? AppColors.beauty : color}
+              color={focused ? AppColors.brandColor : color}
             />
           ),
         }}

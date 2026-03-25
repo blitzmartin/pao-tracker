@@ -6,14 +6,14 @@ import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import {
-  Button,
-  Card,
-  Dialog,
-  List,
-  Portal,
-  RadioButton,
-  Switch,
-  Text,
+    Button,
+    Card,
+    Dialog,
+    List,
+    Portal,
+    RadioButton,
+    Switch,
+    Text,
 } from "react-native-paper";
 
 export default function SettingsScreen() {
@@ -148,7 +148,7 @@ export default function SettingsScreen() {
                     }
                   }}
                   disabled={loading}
-                  trackColor={{false: '#B2B2B2', true: AppColors.beauty}}
+                  trackColor={{false: '#B2B2B2', true: AppColors.brandColor}}
                   color={AppColors.switchOn}
                 />
               )}

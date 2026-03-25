@@ -9,8 +9,8 @@ import React, { useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Card, Chip, Text, TextInput } from "react-native-paper";
 import {
-  calculateDaysUntilExpiry,
-  getMonthYearExpiryDate,
+    calculateDaysUntilExpiry,
+    getMonthYearExpiryDate,
 } from "../utils/dateUtils";
 
 
@@ -132,7 +132,7 @@ export default function AddBeautyScreen() {
                 selected={selectedCategory === category}
                 onPress={() => setSelectedCategory(category)}
                 style={styles.categoryChip}
-                selectedColor={AppColors.beauty}
+                selectedColor={AppColors.brandColor}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -155,7 +155,7 @@ export default function AddBeautyScreen() {
                 selected={usePAO}
                 onPress={() => setUsePAO(true)}
                 style={styles.typeChip}
-                selectedColor={AppColors.beauty}
+                selectedColor={AppColors.brandColor}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -170,7 +170,7 @@ export default function AddBeautyScreen() {
                 selected={!usePAO}
                 onPress={() => setUsePAO(false)}
                 style={styles.typeChip}
-                selectedColor={AppColors.beauty}
+                selectedColor={AppColors.brandColor}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
@@ -200,7 +200,7 @@ export default function AddBeautyScreen() {
                     selected={selectedPAO === months}
                     onPress={() => setSelectedPAO(months)}
                     style={styles.paoChip}
-                    selectedColor={AppColors.beauty}
+                    selectedColor={AppColors.brandColor}
                     showSelectedOverlay={true}
                     theme={{
                       colors: {
@@ -273,7 +273,7 @@ export default function AddBeautyScreen() {
               loading={isLoading}
               disabled={isLoading}
               style={styles.saveButton}
-              buttonColor={AppColors.beauty}
+              buttonColor={AppColors.brandColor}
               textColor="white"
             >
               Save Beauty Product
@@ -284,10 +284,10 @@ export default function AddBeautyScreen() {
               onPress={() => router.back()}
               style={styles.cancelButton}
               buttonColor="transparent"
-              textColor={AppColors.beauty}
+              textColor={AppColors.brandColor}
               theme={{
                 colors: {
-                  outline: AppColors.beauty
+                  outline: AppColors.brandColor
                 }
               }}
             >
