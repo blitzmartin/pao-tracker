@@ -1,3 +1,4 @@
+import { AppColors } from '@/utils/Theme';
 import { ThemedTextProps } from '@/utils/types';
 import { StyleSheet, Text } from 'react-native';
 
@@ -48,6 +49,6 @@ const styles = StyleSheet.create({
   link: {
     lineHeight: 30,
     fontSize: 16,
-    color: '#0a7ea4',
+    color: AppColors.link,
   },
 });

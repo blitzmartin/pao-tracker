@@ -9,8 +9,8 @@ import React, { useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Card, Chip, Text, TextInput } from "react-native-paper";
 import {
-    calculateDaysUntilExpiry,
-    getMonthYearExpiryDate,
+  calculateDaysUntilExpiry,
+  getMonthYearExpiryDate,
 } from "../utils/dateUtils";
 
 
@@ -136,8 +136,8 @@ export default function AddBeautyScreen() {
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: "#E9D5FF",
-                    onSecondaryContainer: "#6B21A8",
+                    secondaryContainer: AppColors.secondaryContainerLight,
+                    onSecondaryContainer: AppColors.secondaryContainerDark,
                   },
                 }}
               >
@@ -159,8 +159,8 @@ export default function AddBeautyScreen() {
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: "#E9D5FF",
-                    onSecondaryContainer: "#6B21A8",
+                    secondaryContainer: AppColors.secondaryContainerLight,
+                    onSecondaryContainer: AppColors.secondaryContainerDark,
                   },
                 }}
               >
@@ -174,8 +174,8 @@ export default function AddBeautyScreen() {
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: "#E9D5FF",
-                    onSecondaryContainer: "#6B21A8",
+                    secondaryContainer: AppColors.secondaryContainerLight,
+                    onSecondaryContainer: AppColors.secondaryContainerDark,
                   },
                 }}
               >
@@ -204,8 +204,8 @@ export default function AddBeautyScreen() {
                     showSelectedOverlay={true}
                     theme={{
                       colors: {
-                        secondaryContainer: "#E9D5FF",
-                        onSecondaryContainer: "#6B21A8",
+                        secondaryContainer: AppColors.secondaryContainerLight,
+                        onSecondaryContainer: AppColors.secondaryContainerDark,
                       },
                     }}
                   >
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f8f5ff",
+    backgroundColor: AppColors.containerBackground,
   },
   card: {
     marginBottom: 16,
@@ -370,11 +370,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 8,
-    color: "#8b8b8b",
+    color: AppColors.pickerLabel,
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: AppColors.pickerContainerBorder,
     borderRadius: 10,
     backgroundColor: "white",
   },
@@ -385,7 +385,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 16,
     padding: 8,
-    backgroundColor: "#f3e8ff",
+    backgroundColor: AppColors.datePreview,
     borderRadius: 8,
     color: AppColors.switchOn,
     fontWeight: "600",

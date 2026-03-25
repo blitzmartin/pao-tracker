@@ -1,5 +1,6 @@
 import { AppHeader } from '@/components/AppHeader';
 import { calculateDaysUntilExpiry, formatDateWithStoredPreference } from '@/utils/dateUtils';
+import { AppColors } from '@/utils/Theme';
 import { BeautyItem } from '@/utils/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
@@ -195,7 +196,7 @@ export default function BeautyListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: AppColors.containerBackground,
   },
   list: {
     paddingHorizontal: 16,
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 8,
     elevation: 2,
-    backgroundColor: '#F9F5FF',
+    backgroundColor: AppColors.cardBackground,
   },
   cardHeader: {
     flexDirection: 'row',
@@ -215,11 +216,11 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   category: {
-    color: '#666',
+    color: AppColors.category,
     marginTop: 4,
   },
   expiryDate: {
-    color: '#666',
+    color: AppColors.category,
     marginTop: 2,
   },
   cardActions: {
@@ -249,7 +250,7 @@ const styles = StyleSheet.create({
   },
   emptySubtext: {
     fontSize: 14,
-    color: '#666',
+    color: AppColors.category,
     textAlign: 'center',
     lineHeight: 20,
   },
