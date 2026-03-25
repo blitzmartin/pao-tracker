@@ -26,10 +26,8 @@ export default function RootLayout() {
   useEffect(() => {
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
-      shouldShowAlert: true,
       shouldPlaySound: true,
       shouldSetBadge: false,
-      // Aggiungi queste due righe per risolvere l'errore TypeScript:
       shouldShowBanner: true,
       shouldShowList: true,
     }),
