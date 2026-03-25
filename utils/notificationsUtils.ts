@@ -7,7 +7,7 @@ export const getNotificationDateFromExpiry = (expiryISO: string): Date => {
 
   /******************** DEBUG MODE ********************/
   // Trigger notification after 5 seconds instead of calculating the date from expiry
-  const DEBUG_MODE = true;
+  const DEBUG_MODE = false;
   if (DEBUG_MODE) {
     // 👉 trigger tra 10 secondi
     const now = new Date();
