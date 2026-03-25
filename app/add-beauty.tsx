@@ -1,4 +1,4 @@
-import { AppColors, TextInputThemes } from "@/utils/Theme";
+import { AppColors } from "@/utils/Theme";
 import { BEAUTY_CATEGORIES, monthNames, MONTHS, PAO_OPTIONS } from '@/utils/constants';
 import { scheduleNotificationForItem } from "@/utils/notificationsUtils";
 import { BeautyItem } from '@/utils/types';
@@ -116,7 +116,7 @@ export default function AddBeautyScreen() {
             onChangeText={setName}
             style={styles.input}
             mode="outlined"
-            theme={TextInputThemes.beauty}
+            theme={AppColors.textInputTheme}
           />
           <Text variant="bodyMedium" style={styles.label}>
             Category

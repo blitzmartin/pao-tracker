@@ -1,5 +1,5 @@
 import { AppHeader } from '@/components/AppHeader';
-import { calculateDaysUntilExpiry, formatDateWithStoredPreference } from '@/utils/dateUtils';
+import { calculateDaysUntilExpiry, formatDateWithStoredPreference, getExpiryColor, getExpiryDisplay } from '@/utils/dateUtils';
 import { AppColors } from '@/utils/Theme';
 import { BeautyItem } from '@/utils/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -95,32 +95,6 @@ export default function BeautyListScreen() {
     );
   };
 
-  const getExpiryColor = (days: number): string => {
-    if (days < 0) return '#d32f2f'; // Expired - Red
-    if (days <= 0) return '#d32f2f'; // Expiring today - Red
-    if (days <= 30) return '#ff9800'; // Expiring soon - Orange
-    if (days <= 90) return '#fbc02d'; // Warning - Yellow
-    return '#388e3c'; // Good - Green
-  };
-
-  const getExpiryDisplay = (item: BeautyItem): string => {
-    if (item.daysUntilExpiry < 0) return 'Expired';
-    if (item.daysUntilExpiry === 0) return 'Today';
-
-    // For PAO products, show the original PAO duration
-    if (item.paoMonths) {
-      if (item.daysUntilExpiry < 0) return 'Expired';
-      return `${item.paoMonths}M left`;
-    }
-
-    // For regular expiry dates, show months if > 60 days, otherwise days
-    if (item.daysUntilExpiry > 60) {
-      const monthsRemaining = Math.ceil(item.daysUntilExpiry / 30);
-      return `${monthsRemaining}M left`;
-    }
-
-    return `${item.daysUntilExpiry}d left`;
-  };
 
 
   const renderBeautyItem = ({ item }: { item: BeautyItem }) => (

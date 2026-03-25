@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "PAO Tracker",
-    "slug": "pao-tracker",
+    "slug": "beauty-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

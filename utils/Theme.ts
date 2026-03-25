@@ -1,4 +1,3 @@
-// Section-specific colors
 export const AppColors = {
   brandColor: '#8B5CF6',
   switchOn: '#5919f1',
@@ -13,21 +12,13 @@ export const AppColors = {
   datePreview: "#f3e8ff",
   pickerContainerBorder: "#ccc",
   pickerLabel: "#8b8b8b",
-  link: '#0a7ea4'
-};
-
-// TextInput themes for each section
-export const TextInputThemes = {
-  beauty: {
+  link: '#0a7ea4',
+  appName: "#1F2937",
+  missionText: "#374151",
+  textInputTheme: {
     colors: {
-      primary: AppColors.brandColor,
-      onSurfaceVariant: AppColors.brandColor,
-    },
-  },
-  settings: {
-    colors: {
-      primary: AppColors.settings,
-      onSurfaceVariant: AppColors.settings,
+      primary: '#8B5CF6',
+      onSurfaceVariant: '#8B5CF6',
     },
   },
 };

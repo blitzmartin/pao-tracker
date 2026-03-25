@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import * as Notifications from "expo-notifications";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
 import "react-native-reanimated";
 

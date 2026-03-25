@@ -1,3 +1,4 @@
+import { AppColors } from '@/utils/Theme';
 import React from "react";
 import { Alert, Linking, ScrollView, StyleSheet, View } from "react-native";
 import { Card, Divider, List, Text } from "react-native-paper";
@@ -166,7 +167,7 @@ export default function AboutScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: AppColors.containerBackground,
   },
   scrollView: {
     flex: 1,
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
   appName: {
     textAlign: "center",
     fontWeight: "bold",
-    color: "#1F2937",
+    color: AppColors.appName,
     marginBottom: 4,
   },
   version: {
@@ -186,13 +187,13 @@ const styles = StyleSheet.create({
     color: "{SectionColors.settings}",
   },
   sectionTitle: {
-    color: "#1F2937",
+    color: AppColors.appName,
     marginBottom: 12,
     fontWeight: "600",
   },
   missionText: {
     lineHeight: 22,
-    color: "#374151",
+    color: AppColors.missionText,
     marginBottom: 16,
   },
   divider: {
@@ -200,14 +201,14 @@ const styles = StyleSheet.create({
   },
   featuresTitle: {
     fontWeight: "600",
-    color: "#374151",
+    color: AppColors.missionText,
     marginBottom: 8,
   },
   featuresList: {
     paddingLeft: 8,
   },
   featureItem: {
-    color: "{SectionColors.settings}",
+    color: AppColors.missionText,
     marginBottom: 4,
     lineHeight: 18,
   },
@@ -223,11 +224,11 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   techLabel: {
-    color: "{SectionColors.settings}",
+    color: AppColors.missionText,
     fontWeight: "500",
   },
   techValue: {
-    color: "#374151",
+    color: AppColors.missionText,
   },
   footer: {
     padding: 16,
