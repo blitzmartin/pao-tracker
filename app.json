@@ -1,45 +1,60 @@
 {
   "expo": {
-    "name": "Beauty Tracker",
+    "name": "PAO Tracker",
     "slug": "beauty-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "beautytracker",
+    "scheme": "paotracker",
     "userInterfaceStyle": "automatic",
     "description": "Track your beauty product expiry dates and PAO (Period After Opening) with smart reminders.",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.beautytracker.app",
+      "bundleIdentifier": "com.paotracker.app",
       "infoPlist": {}
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#8B5CF6"
       },
-      "package": "com.beautytracker.app",
-      "edgeToEdgeEnabled": true
+      "package": "com.paotracker.app"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.ico"
     },
     "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ],
-      "@react-native-community/datetimepicker"
+    "expo-router",
+    [
+      "expo-splash-screen",
+      {
+        "image": "./assets/images/icon.png",
+        "imageWidth": 200,
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      }
     ],
+    [
+      "expo-notifications",
+      {
+        "icon": "./assets/images/notification-icon.png",
+        "color": "#ffffff",
+        "defaultChannel": "default"
+      }
+    ],
+    "@react-native-community/datetimepicker",
+    [
+      "expo-build-properties",
+      {
+        "android": {
+          "ndkVersion": "26.1.10909125"
+        }
+      }
+    ]
+  ],
     "experiments": {
       "typedRoutes": true
     },

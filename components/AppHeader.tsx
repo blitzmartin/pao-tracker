@@ -1,24 +1,21 @@
-import { Colors } from "@/constants/Colors";
-import { AppColors } from "@/constants/Theme";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { AppColors } from '@/utils/Theme';
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Text } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-// Simple icon-based logo for Beauty Tracker
-const BeautyTrackerLogo = ({ size = 40 }: { size?: number }) => (
+// Simple icon-based logo for PAO Tracker
+const PAOTrackerLogo = () => (
   <Avatar.Icon
-    size={size}
-    icon="face-woman"
+    size={40}
+    icon="lotion-outline"
     style={{
-      backgroundColor: Colors.light.brand,
+      backgroundColor: AppColors.brandColor,
     }}
   />
 );
 
 export function AppHeader() {
-  const colorScheme = useColorScheme() ?? "light";
   const insets = useSafeAreaInsets();
 
   return (
@@ -26,16 +23,16 @@ export function AppHeader() {
       style={[
         styles.header,
         {
-          backgroundColor: AppColors[colorScheme].background,
+          backgroundColor: '#fff',
           paddingTop: insets.top + 16,
         },
       ]}
     >
       <View style={styles.headerContent}>
-        <BeautyTrackerLogo size={40} />
+        <PAOTrackerLogo />
         <Text
           variant="headlineMedium"
-          style={[styles.title, { color: Colors.light.brand }]}
+          style={[styles.title, { color: AppColors.brandColor }]}
         >
           PAO Tracker
         </Text>

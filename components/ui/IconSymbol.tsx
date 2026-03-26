@@ -3,16 +3,10 @@
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { SymbolWeight } from "expo-symbols";
-import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 import { ComponentProps } from "react";
+import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 
 type MaterialIconName = ComponentProps<typeof MaterialIcons>['name'];
-type FontAwesome6IconName = ComponentProps<typeof FontAwesome6>['name'];
-
-type IconConfig = 
-  | { type: "material"; name: MaterialIconName }
-  | { type: "fontawesome6"; name: FontAwesome6IconName };
-
 type IconSymbolName = keyof typeof MAPPING;
 
 /**

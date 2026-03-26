@@ -1,22 +1,15 @@
-import React, { useState, useCallback } from 'react';
-import { View, StyleSheet, FlatList, RefreshControl, Alert } from 'react-native';
-import { Card, Text, FAB, Chip, IconButton } from 'react-native-paper';
-import { useFocusEffect } from '@react-navigation/native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { router } from 'expo-router';
-import { formatDateWithStoredPreference, calculateDaysUntilExpiry } from '@/utils/dateUtils';
 import { AppHeader } from '@/components/AppHeader';
+import { calculateDaysUntilExpiry, formatDateWithStoredPreference, getExpiryColor, getExpiryDisplay } from '@/utils/dateUtils';
+import { AppColors } from '@/utils/Theme';
+import { BeautyItem } from '@/utils/types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+import { router } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import { Alert, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { Card, Chip, FAB, IconButton, Text } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-interface BeautyItem {
-  id: string;
-  name: string;
-  expiryDate: string;
-  category?: string;
-  daysUntilExpiry: number;
-  paoMonths?: number;
-  openingDate?: string;
-}
 
 export default function BeautyListScreen() {
   const [beautyItems, setBeautyItems] = useState<BeautyItem[]>([]);
@@ -29,18 +22,18 @@ export default function BeautyListScreen() {
       const items = await AsyncStorage.getItem('beautyItems');
       if (items) {
         const parsedItems: BeautyItem[] = JSON.parse(items);
-        
+
         // Recalculate days until expiry for each item
         const updatedItems = parsedItems.map(item => ({
           ...item,
           daysUntilExpiry: calculateDaysUntilExpiry(new Date(item.expiryDate))
         }));
-        
+
         // Sort by days until expiry (most urgent first)
         updatedItems.sort((a, b) => a.daysUntilExpiry - b.daysUntilExpiry);
-        
+
         setBeautyItems(updatedItems);
-        
+
         // Format dates for display
         const dateFormatPromises = updatedItems.map(async (item) => {
           const expiryFormatted = await formatDateWithStoredPreference(new Date(item.expiryDate));
@@ -50,7 +43,7 @@ export default function BeautyListScreen() {
           }
           return { id: item.id, expiry: expiryFormatted, opening: openingFormatted };
         });
-        
+
         const formattedDateResults = await Promise.all(dateFormatPromises);
         const dateMap: {[key: string]: {expiry: string, opening?: string}} = {};
         formattedDateResults.forEach(({ id, expiry, opening }) => {
@@ -65,7 +58,6 @@ export default function BeautyListScreen() {
       setBeautyItems([]);
     }
   };
-
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -92,7 +84,7 @@ export default function BeautyListScreen() {
             try {
               const updatedItems = beautyItems.filter(item => item.id !== id);
               await AsyncStorage.setItem('beautyItems', JSON.stringify(updatedItems));
-              
+
               setBeautyItems(updatedItems);
             } catch (error) {
               Alert.alert('Error', 'Failed to delete beauty product');
@@ -103,32 +95,6 @@ export default function BeautyListScreen() {
     );
   };
 
-  const getExpiryColor = (days: number): string => {
-    if (days < 0) return '#d32f2f'; // Expired - Red
-    if (days <= 0) return '#d32f2f'; // Expiring today - Red
-    if (days <= 30) return '#ff9800'; // Expiring soon - Orange
-    if (days <= 90) return '#fbc02d'; // Warning - Yellow
-    return '#388e3c'; // Good - Green
-  };
-
-  const getExpiryDisplay = (item: BeautyItem): string => {
-    if (item.daysUntilExpiry < 0) return 'Expired';
-    if (item.daysUntilExpiry === 0) return 'Today';
-    
-    // For PAO products, show the original PAO duration
-    if (item.paoMonths) {
-      if (item.daysUntilExpiry < 0) return 'Expired';
-      return `${item.paoMonths}M left`;
-    }
-    
-    // For regular expiry dates, show months if > 60 days, otherwise days
-    if (item.daysUntilExpiry > 60) {
-      const monthsRemaining = Math.ceil(item.daysUntilExpiry / 30);
-      return `${monthsRemaining}M left`;
-    }
-    
-    return `${item.daysUntilExpiry}d left`;
-  };
 
 
   const renderBeautyItem = ({ item }: { item: BeautyItem }) => (
@@ -142,14 +108,14 @@ export default function BeautyListScreen() {
               {item.paoMonths && ` • PAO: ${item.paoMonths}M`}
             </Text>
             <Text variant="bodySmall" style={styles.expiryDate}>
-              {item.paoMonths && item.openingDate 
+              {item.paoMonths && item.openingDate
                 ? `Opened: ${formattedDates[item.id]?.opening || 'Loading...'}`
                 : `Expires: ${formattedDates[item.id]?.expiry || 'Loading...'}`
               }
             </Text>
           </View>
           <View style={styles.cardActions}>
-            <Chip 
+            <Chip
               textStyle={[styles.chipText, { color: getExpiryColor(item.daysUntilExpiry) }]}
               style={[styles.expiryChip, { borderColor: getExpiryColor(item.daysUntilExpiry) }]}
             >
@@ -169,7 +135,7 @@ export default function BeautyListScreen() {
   return (
     <View style={styles.container}>
       <AppHeader />
-      
+
       {beautyItems.length === 0 && !refreshing ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyText}>No beauty products found.</Text>
@@ -204,7 +170,7 @@ export default function BeautyListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: AppColors.containerBackground,
   },
   list: {
     paddingHorizontal: 16,
@@ -212,7 +178,7 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 8,
     elevation: 2,
-    backgroundColor: '#F9F5FF',
+    backgroundColor: AppColors.cardBackground,
   },
   cardHeader: {
     flexDirection: 'row',
@@ -224,11 +190,11 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   category: {
-    color: '#666',
+    color: AppColors.category,
     marginTop: 4,
   },
   expiryDate: {
-    color: '#666',
+    color: AppColors.category,
     marginTop: 2,
   },
   cardActions: {
@@ -258,7 +224,7 @@ const styles = StyleSheet.create({
   },
   emptySubtext: {
     fontSize: 14,
-    color: '#666',
+    color: AppColors.category,
     textAlign: 'center',
     lineHeight: 20,
   },

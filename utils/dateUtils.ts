@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BeautyItem } from './types';
 
 export type DateFormat = 'DD-MM-YYYY' | 'MM-DD-YYYY';
 
@@ -23,7 +24,6 @@ export const formatDate = (date: Date, format?: DateFormat): string => {
   if (format === 'MM-DD-YYYY') {
     return `${month}-${day}-${year}`;
   }
-  
   // Default to DD-MM-YYYY
   return `${day}-${month}-${year}`;
 };
@@ -69,3 +69,31 @@ export const getMonthYearExpiryDate = (year: number, month: number): Date => {
   // For month-year expiration, items expire at the END of the specified month
   return getEndOfMonth(year, month);
 };
+
+  export const getExpiryDisplay = (item: BeautyItem): string => {
+    if (item.daysUntilExpiry < 0) return 'Expired';
+    if (item.daysUntilExpiry === 0) return 'Today';
+
+    // For PAO products, show the original PAO duration
+    if (item.paoMonths) {
+      if (item.daysUntilExpiry < 0) return 'Expired';
+      return `${item.paoMonths}M left`;
+    }
+
+    // For regular expiry dates, show months if > 60 days, otherwise days
+    if (item.daysUntilExpiry > 60) {
+      const monthsRemaining = Math.ceil(item.daysUntilExpiry / 30);
+      return `${monthsRemaining}M left`;
+    }
+
+    return `${item.daysUntilExpiry}d left`;
+  };
+
+
+  export const getExpiryColor = (days: number): string => {
+    if (days < 0) return '#d32f2f'; // Expired - Red
+    if (days <= 0) return '#d32f2f'; // Expiring today - Red
+    if (days <= 30) return '#ff9800'; // Expiring soon - Orange
+    if (days <= 90) return '#fbc02d'; // Warning - Yellow
+    return '#388e3c'; // Good - Green
+  };

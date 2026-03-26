@@ -1,3 +1,4 @@
+import { AppColors } from '@/utils/Theme';
 import React from "react";
 import { Alert, Linking, ScrollView, StyleSheet, View } from "react-native";
 import { Card, Divider, List, Text } from "react-native-paper";
@@ -8,7 +9,7 @@ export default function AboutScreen() {
 
   const handleContactSupport = () => {
     const email = "paperboardlabs@gmail.com"; // Replace with your actual email
-    const subject = "Beauty Tracker Support Request";
+    const subject = "PAO Tracker Support Request";
     const body = `App Version: ${appVersion} (${buildNumber})\nDevice: Mobile\n\nDescribe your issue or feedback:\n`;
 
     const mailto = `mailto:${email}?subject=${encodeURIComponent(
@@ -25,7 +26,7 @@ export default function AboutScreen() {
 
   const handleReportBug = () => {
     const email = "paperboardlabs@gmail.com"; // Replace with support@paperboardlabs.com when ready
-    const subject = "Beauty Tracker Bug Report";
+    const subject = "PAO Tracker Bug Report";
     const body = `App Version: ${appVersion} (${buildNumber})\nDevice: Mobile\n\nSteps to reproduce:\n1. \n2. \n3. \n\nExpected behavior:\n\nActual behavior:\n\nAdditional notes:\n`;
 
     const mailto = `mailto:${email}?subject=${encodeURIComponent(
@@ -43,7 +44,7 @@ export default function AboutScreen() {
   const handlePrivacyPolicy = () => {
     Alert.alert(
       "Privacy Policy",
-      "Beauty Tracker stores all data locally on your device. No personal information is collected or transmitted to external servers."
+      "PAO Tracker stores all data locally on your device. No personal information is collected or transmitted to external servers."
     );
   };
 
@@ -56,7 +57,7 @@ export default function AboutScreen() {
               Our Mission
             </Text>
             <Text variant="bodyMedium" style={styles.missionText}>
-              Beauty Tracker helps you reduce waste and save money by tracking
+              PAO Tracker helps you reduce waste and save money by tracking
               expiry dates and PAO (Period After Opening) for your beauty products. Our goal
               is to make it easy for everyone to manage their cosmetics and skincare
               efficiently and sustainably.
@@ -93,7 +94,7 @@ export default function AboutScreen() {
 
             <List.Item
               title="Contact Support"
-              description="Get help with using Beauty Tracker"
+              description="Get help with using PAO Tracker"
               left={(props) => <List.Icon {...props} icon="help-circle" />}
               onPress={handleContactSupport}
               style={styles.listItem}
@@ -166,7 +167,7 @@ export default function AboutScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: AppColors.containerBackground,
   },
   scrollView: {
     flex: 1,
@@ -178,21 +179,21 @@ const styles = StyleSheet.create({
   appName: {
     textAlign: "center",
     fontWeight: "bold",
-    color: "#1F2937",
+    color: AppColors.appName,
     marginBottom: 4,
   },
   version: {
     textAlign: "center",
-    color: "#6B7280",
+    color: "{SectionColors.settings}",
   },
   sectionTitle: {
-    color: "#1F2937",
+    color: AppColors.appName,
     marginBottom: 12,
     fontWeight: "600",
   },
   missionText: {
     lineHeight: 22,
-    color: "#374151",
+    color: AppColors.missionText,
     marginBottom: 16,
   },
   divider: {
@@ -200,14 +201,14 @@ const styles = StyleSheet.create({
   },
   featuresTitle: {
     fontWeight: "600",
-    color: "#374151",
+    color: AppColors.missionText,
     marginBottom: 8,
   },
   featuresList: {
     paddingLeft: 8,
   },
   featureItem: {
-    color: "#6B7280",
+    color: AppColors.missionText,
     marginBottom: 4,
     lineHeight: 18,
   },
@@ -223,11 +224,11 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   techLabel: {
-    color: "#6B7280",
+    color: AppColors.missionText,
     fontWeight: "500",
   },
   techValue: {
-    color: "#374151",
+    color: AppColors.missionText,
   },
   footer: {
     padding: 16,

@@ -1,53 +1,27 @@
+import { AppColors } from "@/utils/Theme";
+import { BEAUTY_CATEGORIES, monthNames, MONTHS, PAO_OPTIONS } from '@/utils/constants';
+import { scheduleNotificationForItem } from "@/utils/notificationsUtils";
+import { BeautyItem } from '@/utils/types';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Card, Chip, Text, TextInput } from "react-native-paper";
-import { calculateDaysUntilExpiry, getMonthYearExpiryDate } from "../utils/dateUtils";
-import { TextInputThemes } from "@/constants/Theme";
+import {
+  calculateDaysUntilExpiry,
+  getMonthYearExpiryDate,
+} from "../utils/dateUtils";
 
-interface BeautyItem {
-  id: string;
-  name: string;
-  expiryDate: string;
-  category?: string;
-  daysUntilExpiry: number;
-  paoMonths?: number;
-  openingDate?: string;
-}
 
-const BEAUTY_CATEGORIES = [
-  "Skincare",
-  "Makeup",
-  "Hair Care",
-  "Body Care",
-  "Fragrance",
-  "Nail Care",
-  "Sun Care",
-  "Other",
-];
-
-const PAO_OPTIONS = [6, 9, 12, 24, 36];
-
-const MONTHS = [
-  { label: "January", value: 1 },
-  { label: "February", value: 2 },
-  { label: "March", value: 3 },
-  { label: "April", value: 4 },
-  { label: "May", value: 5 },
-  { label: "June", value: 6 },
-  { label: "July", value: 7 },
-  { label: "August", value: 8 },
-  { label: "September", value: 9 },
-  { label: "October", value: 10 },
-  { label: "November", value: 11 },
-  { label: "December", value: 12 },
-];
 
 const generateYears = (): number[] => {
   const years = [];
-  for (let i = new Date().getFullYear(); i <= new Date().getFullYear() + 10; i++) {
+  for (
+    let i = new Date().getFullYear();
+    i <= new Date().getFullYear() + 10;
+    i++
+  ) {
     years.push(i);
   }
   return years;
@@ -62,7 +36,6 @@ export default function AddBeautyScreen() {
   const [usePAO, setUsePAO] = useState(true);
   const [selectedPAO, setSelectedPAO] = useState<number | null>(null);
 
-
   const calculatePAOExpiry = (openingDate: Date, paoMonths: number): Date => {
     const expiry = new Date(openingDate);
     expiry.setMonth(expiry.getMonth() + paoMonths);
@@ -74,20 +47,6 @@ export default function AddBeautyScreen() {
   };
 
   const formatExpiryDate = (month: number, year: number): string => {
-    const monthNames = [
-      "January",
-      "February", 
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
     return `${monthNames[month - 1]} ${year}`;
   };
 
@@ -136,7 +95,7 @@ export default function AddBeautyScreen() {
       items.push(newItem);
 
       await AsyncStorage.setItem("beautyItems", JSON.stringify(items));
-
+      await scheduleNotificationForItem(newItem);
 
       // Navigate back directly without confirmation
       router.back();
@@ -146,7 +105,6 @@ export default function AddBeautyScreen() {
       setIsLoading(false);
     }
   };
-
 
   return (
     <ScrollView style={styles.container}>
@@ -158,9 +116,8 @@ export default function AddBeautyScreen() {
             onChangeText={setName}
             style={styles.input}
             mode="outlined"
-            theme={TextInputThemes.beauty}
+            theme={AppColors.textInputTheme}
           />
-
           <Text variant="bodyMedium" style={styles.label}>
             Category
           </Text>
@@ -175,13 +132,13 @@ export default function AddBeautyScreen() {
                 selected={selectedCategory === category}
                 onPress={() => setSelectedCategory(category)}
                 style={styles.categoryChip}
-                selectedColor="#8B5CF6"
+                selectedColor={AppColors.brandColor}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: '#E9D5FF',
-                    onSecondaryContainer: '#6B21A8'
-                  }
+                    secondaryContainer: AppColors.secondaryContainerLight,
+                    onSecondaryContainer: AppColors.secondaryContainerDark,
+                  },
                 }}
               >
                 {category}
@@ -198,13 +155,13 @@ export default function AddBeautyScreen() {
                 selected={usePAO}
                 onPress={() => setUsePAO(true)}
                 style={styles.typeChip}
-                selectedColor="#8B5CF6"
+                selectedColor={AppColors.brandColor}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: '#E9D5FF',
-                    onSecondaryContainer: '#6B21A8'
-                  }
+                    secondaryContainer: AppColors.secondaryContainerLight,
+                    onSecondaryContainer: AppColors.secondaryContainerDark,
+                  },
                 }}
               >
                 PAO (Period After Opening)
@@ -213,13 +170,13 @@ export default function AddBeautyScreen() {
                 selected={!usePAO}
                 onPress={() => setUsePAO(false)}
                 style={styles.typeChip}
-                selectedColor="#8B5CF6"
+                selectedColor={AppColors.brandColor}
                 showSelectedOverlay={true}
                 theme={{
                   colors: {
-                    secondaryContainer: '#E9D5FF',
-                    onSecondaryContainer: '#6B21A8'
-                  }
+                    secondaryContainer: AppColors.secondaryContainerLight,
+                    onSecondaryContainer: AppColors.secondaryContainerDark,
+                  },
                 }}
               >
                 Custom Date
@@ -243,13 +200,13 @@ export default function AddBeautyScreen() {
                     selected={selectedPAO === months}
                     onPress={() => setSelectedPAO(months)}
                     style={styles.paoChip}
-                    selectedColor="#8B5CF6"
+                    selectedColor={AppColors.brandColor}
                     showSelectedOverlay={true}
                     theme={{
                       colors: {
-                        secondaryContainer: '#E9D5FF',
-                        onSecondaryContainer: '#6B21A8'
-                      }
+                        secondaryContainer: AppColors.secondaryContainerLight,
+                        onSecondaryContainer: AppColors.secondaryContainerDark,
+                      },
                     }}
                   >
                     {months}M
@@ -316,7 +273,7 @@ export default function AddBeautyScreen() {
               loading={isLoading}
               disabled={isLoading}
               style={styles.saveButton}
-              buttonColor="#8B5CF6"
+              buttonColor={AppColors.brandColor}
               textColor="white"
             >
               Save Beauty Product
@@ -327,8 +284,12 @@ export default function AddBeautyScreen() {
               onPress={() => router.back()}
               style={styles.cancelButton}
               buttonColor="transparent"
-              textColor="#8B5CF6"
-              theme={{ colors: { outline: '#8B5CF6' } }}
+              textColor={AppColors.brandColor}
+              theme={{
+                colors: {
+                  outline: AppColors.brandColor
+                }
+              }}
             >
               Cancel
             </Button>
@@ -343,7 +304,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f8f5ff",
+    backgroundColor: AppColors.containerBackground,
   },
   card: {
     marginBottom: 16,
@@ -409,24 +370,24 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 8,
-    color: "#666",
+    color: AppColors.pickerLabel,
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
+    borderColor: AppColors.pickerContainerBorder,
+    borderRadius: 10,
     backgroundColor: "white",
   },
   picker: {
-    height: 50,
+    height: 60,
   },
   datePreview: {
     textAlign: "center",
     marginBottom: 16,
-    padding: 12,
-    backgroundColor: "#f3e8ff",
+    padding: 8,
+    backgroundColor: AppColors.datePreview,
     borderRadius: 8,
-    color: "#7c3aed",
+    color: AppColors.switchOn,
     fontWeight: "600",
   },
 });

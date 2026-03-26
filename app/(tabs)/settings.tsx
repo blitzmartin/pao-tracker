@@ -1,4 +1,6 @@
 import { AppHeader } from "@/components/AppHeader";
+import { useNotificationSettings } from "@/hooks/useNotifications";
+import { AppColors } from '@/utils/Theme';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -6,11 +8,11 @@ import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import {
   Button,
   Card,
-  Checkbox,
   Dialog,
   List,
   Portal,
   RadioButton,
+  Switch,
   Text,
 } from "react-native-paper";
 
@@ -18,9 +20,11 @@ export default function SettingsScreen() {
   const [clearDataDialogVisible, setClearDataDialogVisible] = useState(false);
   const [deleteBeautyItems, setDeleteBeautyItems] = useState(true);
   const [dateFormat, setDateFormat] = useState<"DD-MM-YYYY" | "MM-DD-YYYY">(
-    "DD-MM-YYYY"
+    "DD-MM-YYYY",
   );
   const [dateFormatDialogVisible, setDateFormatDialogVisible] = useState(false);
+
+  const { enabled, toggle, loading } = useNotificationSettings();
 
   useEffect(() => {
     loadDateFormat();
@@ -39,7 +43,6 @@ export default function SettingsScreen() {
       console.error("Error loading date format:", error);
     }
   };
-
 
   const saveDateFormat = async (format: "DD-MM-YYYY" | "MM-DD-YYYY") => {
     try {
@@ -65,10 +68,6 @@ export default function SettingsScreen() {
     setClearDataDialogVisible(true);
   };
 
-  const hideClearDataDialog = () => {
-    setClearDataDialogVisible(false);
-  };
-
   const confirmClearAllData = async () => {
     try {
       await AsyncStorage.removeItem("beautyItems");
@@ -77,6 +76,10 @@ export default function SettingsScreen() {
     } catch (error) {
       Alert.alert("Error", "Failed to clear data.");
     }
+  };
+
+  const hideClearDataDialog = () => {
+    setClearDataDialogVisible(false);
   };
 
   return (
@@ -89,19 +92,16 @@ export default function SettingsScreen() {
             <List.Item
               title="Date Format"
               description={`Currently using: ${dateFormat}`}
-              right={() => (
-                <Button
+            />
+             <Button
                   mode="outlined"
                   onPress={showDateFormatDialog}
-                  compact
                   buttonColor="transparent"
                   textColor="#4B5563"
                   theme={{ colors: { outline: "#4B5563" } }}
                 >
                   Change
                 </Button>
-              )}
-            />
           </Card.Content>
         </Card>
 
@@ -121,6 +121,38 @@ export default function SettingsScreen() {
             >
               Clear All Data
             </Button>
+          </Card.Content>
+        </Card>
+
+        <Card style={styles.card}>
+          <Card.Content>
+            <Text variant="titleLarge">Notifications</Text>
+
+            <Text variant="bodyMedium" style={styles.description}>
+              Get reminded on the first day of the month when a
+              product is about to expire.
+            </Text>
+
+            <List.Item
+              title="Enable notifications"
+              right={() => (
+                <Switch
+                  value={enabled}
+                  onValueChange={async () => {
+                    const result = await toggle();
+                    if (result?.success === false) {
+                      Alert.alert(
+                        "Permission required",
+                        "Please enable notifications permissions in your device settings.",
+                      );
+                    }
+                  }}
+                  disabled={loading}
+                  trackColor={{false: '#B2B2B2', true: AppColors.brandColor}}
+                  color={AppColors.switchOn}
+                />
+              )}
+            />
           </Card.Content>
         </Card>
 
@@ -149,14 +181,14 @@ export default function SettingsScreen() {
             <Dialog.Title style={styles.dialogTitle}>Clear Data</Dialog.Title>
             <Dialog.Content>
               <Text variant="bodyMedium" style={styles.dialogContent}>
-                This will delete all your beauty products data. This action cannot be
-                undone.
+                This will delete all your beauty products data. This action
+                cannot be undone.
               </Text>
             </Dialog.Content>
             <Dialog.Actions style={styles.dialogActions}>
               <Button
                 onPress={hideClearDataDialog}
-                textColor="#6B7280"
+                textColor={AppColors.settings}
                 style={styles.cancelButton}
               >
                 Cancel
@@ -198,7 +230,7 @@ export default function SettingsScreen() {
                     color="#4B5563"
                   />
                   <Text variant="bodyMedium" style={styles.radioLabel}>
-                    DD-MM-YYYY (e.g., 25-12-2024)
+                    DD-MM-YYYY (e.g., 25-12-2026)
                   </Text>
                 </View>
 
@@ -212,7 +244,7 @@ export default function SettingsScreen() {
                     color="#4B5563"
                   />
                   <Text variant="bodyMedium" style={styles.radioLabel}>
-                    MM-DD-YYYY (e.g., 12-25-2024)
+                    MM-DD-YYYY (e.g., 12-25-2026)
                   </Text>
                 </View>
               </View>
@@ -220,7 +252,7 @@ export default function SettingsScreen() {
             <Dialog.Actions style={styles.dialogActions}>
               <Button
                 onPress={hideDateFormatDialog}
-                textColor="#6B7280"
+                textColor={AppColors.settings}
                 style={styles.cancelButton}
               >
                 Cancel
