@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "PAO Tracker",
-    "slug": "beauty-tracker",
+    "slug": "pao-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -61,7 +61,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "5c848dd6-059f-47b8-91c2-bff5539e702a"
+        "projectId": "a72f0802-2b99-4ec8-913e-3457f149e74d"
       }
     }
   }
