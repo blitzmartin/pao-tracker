@@ -9,6 +9,10 @@ export function useNotificationSettings() {
     (async () => {
       const val = await areNotificationsEnabled();
       setEnabled(val);
+         // Reschedule notifications if they are enabled
+      if (val) {
+        await rescheduleAllNotifications();
+      }
       setLoading(false);
     })();
   }, []);
