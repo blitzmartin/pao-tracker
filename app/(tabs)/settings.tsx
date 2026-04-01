@@ -18,6 +18,7 @@ import {
 
 export default function SettingsScreen() {
   const [clearDataDialogVisible, setClearDataDialogVisible] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [deleteBeautyItems, setDeleteBeautyItems] = useState(true);
   const [dateFormat, setDateFormat] = useState<"DD-MM-YYYY" | "MM-DD-YYYY">(
     "DD-MM-YYYY",
@@ -51,7 +52,9 @@ export default function SettingsScreen() {
       setDateFormatDialogVisible(false);
       Alert.alert("Success", `Date format changed to ${format}`);
     } catch (error) {
-      Alert.alert("Error", "Failed to save date format preference");
+      const message =
+        error instanceof Error ? error.message : "An unknown error occurred";
+      Alert.alert("Error", `Failed to save date format preference: ${message}`);
     }
   };
 
@@ -74,7 +77,9 @@ export default function SettingsScreen() {
       setClearDataDialogVisible(false);
       Alert.alert("Success", "All beauty items have been cleared.");
     } catch (error) {
-      Alert.alert("Error", "Failed to clear data.");
+      const message =
+        error instanceof Error ? error.message : "An unknown error occurred";
+      Alert.alert("Error", `Failed to clear data.t: ${message}`);
     }
   };
 
