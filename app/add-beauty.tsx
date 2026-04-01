@@ -1,7 +1,12 @@
 import { AppColors } from "@/utils/Theme";
-import { BEAUTY_CATEGORIES, monthNames, MONTHS, PAO_OPTIONS } from '@/utils/constants';
+import {
+  BEAUTY_CATEGORIES,
+  monthNames,
+  MONTHS,
+  PAO_OPTIONS,
+} from "@/utils/constants";
 import { scheduleNotificationForItem } from "@/utils/notificationsUtils";
-import { BeautyItem } from '@/utils/types';
+import { BeautyItem } from "@/utils/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
 import { router } from "expo-router";
@@ -12,8 +17,6 @@ import {
   calculateDaysUntilExpiry,
   getMonthYearExpiryDate,
 } from "../utils/dateUtils";
-
-
 
 const generateYears = (): number[] => {
   const years = [];
@@ -287,8 +290,8 @@ export default function AddBeautyScreen() {
               textColor={AppColors.brandColor}
               theme={{
                 colors: {
-                  outline: AppColors.brandColor
-                }
+                  outline: AppColors.brandColor,
+                },
               }}
             >
               Cancel
@@ -380,6 +383,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     height: 60,
+    color: AppColors.pickerLabel,
   },
   datePreview: {
     textAlign: "center",
