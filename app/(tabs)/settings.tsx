@@ -1,6 +1,6 @@
 import { AppHeader } from "@/components/AppHeader";
 import { useNotificationSettings } from "@/hooks/useNotifications";
-import { AppColors } from '@/utils/Theme';
+import { AppColors } from "@/utils/Theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -93,15 +93,15 @@ export default function SettingsScreen() {
               title="Date Format"
               description={`Currently using: ${dateFormat}`}
             />
-             <Button
-                  mode="outlined"
-                  onPress={showDateFormatDialog}
-                  buttonColor="transparent"
-                  textColor="#4B5563"
-                  theme={{ colors: { outline: "#4B5563" } }}
-                >
-                  Change
-                </Button>
+            <Button
+              mode="outlined"
+              onPress={showDateFormatDialog}
+              buttonColor="transparent"
+              textColor="#4B5563"
+              theme={{ colors: { outline: "#4B5563" } }}
+            >
+              Change
+            </Button>
           </Card.Content>
         </Card>
 
@@ -126,11 +126,11 @@ export default function SettingsScreen() {
 
         <Card style={styles.card}>
           <Card.Content>
-            <Text variant="titleLarge">Notifications</Text>
+            <Text variant="headlineSmall">Notifications</Text>
 
             <Text variant="bodyMedium" style={styles.description}>
-              Get reminded on the first day of the month when a
-              product is about to expire.
+              Get reminded on the first day of the month when a product is about
+              to expire.
             </Text>
 
             <List.Item
@@ -148,7 +148,7 @@ export default function SettingsScreen() {
                     }
                   }}
                   disabled={loading}
-                  trackColor={{false: '#B2B2B2', true: AppColors.brandColor}}
+                  trackColor={{ false: "#B2B2B2", true: AppColors.brandColor }}
                   color={AppColors.switchOn}
                 />
               )}
@@ -159,7 +159,7 @@ export default function SettingsScreen() {
         <Card style={styles.card} onPress={() => router.push("/about")}>
           <Card.Content>
             <View style={styles.aboutHeader}>
-              <Text variant="titleLarge">About</Text>
+              <Text variant="headlineSmall">About</Text>
               <List.Icon
                 icon="information"
                 color="#4B5563"

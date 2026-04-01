@@ -22,3 +22,12 @@ export const AppColors = {
     },
   },
 };
+
+
+export const AppTypography = {
+  headlineSmall: { fontSize: 20, lineHeight: 28 },
+  titleLarge:    { fontSize: 18, lineHeight: 26 },
+  titleMedium:   { fontSize: 16, lineHeight: 24 },
+  bodyMedium:    { fontSize: 14, lineHeight: 20 },
+  bodySmall:     { fontSize: 12, lineHeight: 16 },
+};

@@ -1,4 +1,4 @@
-import { AppColors } from "@/utils/Theme";
+import { AppColors, AppTypography } from "@/utils/Theme";
 import { useFonts } from "expo-font";
 import * as Notifications from "expo-notifications";
 import { Stack } from "expo-router";
@@ -14,6 +14,29 @@ export default function RootLayout() {
       ...MD3LightTheme.colors,
       primary: AppColors.brandColor,
       secondary: AppColors.tintColor,
+    },
+    fonts: {
+      ...MD3LightTheme.fonts,
+      headlineSmall: {
+        ...MD3LightTheme.fonts.headlineSmall,
+        ...AppTypography.headlineSmall,
+      },
+      titleLarge: {
+        ...MD3LightTheme.fonts.titleLarge,
+        ...AppTypography.titleLarge,
+      },
+      titleMedium: {
+        ...MD3LightTheme.fonts.titleMedium,
+        ...AppTypography.titleMedium,
+      },
+      bodyMedium: {
+        ...MD3LightTheme.fonts.bodyMedium,
+        ...AppTypography.bodyMedium,
+      },
+      bodySmall: {
+        ...MD3LightTheme.fonts.bodySmall,
+        ...AppTypography.bodySmall,
+      },
     },
   };
   const [loaded] = useFonts({
